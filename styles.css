@@ -1,0 +1,1503 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    color: #2c2c2c;
+    line-height: 1.6;
+    overflow-x: hidden;
+    background-color: #f5f5f0;
+}
+
+/* Landing Section */
+.landing {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #3a3a3a 0%, #2d2d2d 100%);
+    position: relative;
+    transition: opacity 0.5s ease;
+}
+
+.landing.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.landing-content {
+    text-align: center;
+    padding: 2rem;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 1.2s ease-out 0.3s forwards;
+}
+
+.landing-text {
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    font-weight: 300;
+    color: #e8e8e8;
+    margin-bottom: 3rem;
+    letter-spacing: 0.5px;
+    line-height: 1.4;
+}
+
+.scroll-button {
+    background: transparent;
+    border: 1px solid #e8e8e8;
+    color: #e8e8e8;
+    padding: 1rem 2.5rem;
+    font-size: 1rem;
+    font-family: 'Georgia', serif;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    letter-spacing: 0.5px;
+}
+
+.scroll-button:hover {
+    background: rgba(232, 232, 232, 0.1);
+    transform: translateY(-2px);
+}
+
+/* Animation Overlay */
+.animation-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #0a0a1a;
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+}
+
+.animation-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.animation-overlay.fade-out {
+    opacity: 0;
+}
+
+/* Night Sky */
+.night-sky {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    background-image: url("images/Gemini_Generated_Image_38dpba38dpba38dp.png");
+    background-size: contain;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+/* Stars */
+.night-sky::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(2px 2px at 20% 30%, #fff, transparent),
+        radial-gradient(2px 2px at 60% 70%, #fff, transparent),
+        radial-gradient(1px 1px at 50% 50%, #fff, transparent),
+        radial-gradient(1px 1px at 80% 10%, #fff, transparent),
+        radial-gradient(2px 2px at 90% 60%, #fff, transparent),
+        radial-gradient(1px 1px at 33% 80%, #fff, transparent),
+        radial-gradient(1px 1px at 70% 20%, #fff, transparent);
+    background-size: 200% 200%;
+    animation: twinkle 3s ease-in-out infinite;
+    opacity: 0.6;
+}
+
+@keyframes twinkle {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 0.8; }
+}
+
+/* Fireworks */
+.firework {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    opacity: 0;
+    background: #fff;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+}
+
+.firework-1 {
+    top: 25%;
+    left: 20%;
+    animation: fireworkBurst1 2.5s ease-out 0.5s forwards;
+}
+
+.firework-2 {
+    top: 30%;
+    left: 60%;
+    animation: fireworkBurst2 2.5s ease-out 1s forwards;
+}
+
+.firework-3 {
+    top: 20%;
+    left: 80%;
+    animation: fireworkBurst3 2.5s ease-out 1.5s forwards;
+}
+
+.firework-4 {
+    top: 35%;
+    left: 40%;
+    animation: fireworkBurst1 2.5s ease-out 2s forwards;
+}
+
+.firework-5 {
+    top: 25%;
+    left: 70%;
+    animation: fireworkBurst2 2.5s ease-out 2.5s forwards;
+}
+
+@keyframes fireworkBurst1 {
+    0% {
+        opacity: 1;
+        transform: scale(0);
+        box-shadow: 
+            0 0 0 0 rgba(255, 200, 100, 1),
+            0 0 0 0 rgba(255, 150, 200, 1),
+            0 0 20px rgba(255, 200, 100, 0.8);
+    }
+    30% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(1.5);
+        box-shadow: 
+            -100px -100px 0 30px rgba(255, 200, 100, 0),
+            100px -100px 0 30px rgba(255, 150, 200, 0),
+            -100px 100px 0 30px rgba(255, 200, 100, 0),
+            100px 100px 0 30px rgba(255, 150, 200, 0),
+            -60px 0 0 25px rgba(255, 200, 100, 0),
+            60px 0 0 25px rgba(255, 150, 200, 0),
+            0 -60px 0 25px rgba(255, 200, 100, 0),
+            0 60px 0 25px rgba(255, 150, 200, 0),
+            -40px -40px 0 18px rgba(255, 220, 120, 0),
+            40px -40px 0 18px rgba(255, 170, 220, 0),
+            -40px 40px 0 18px rgba(255, 220, 120, 0),
+            40px 40px 0 18px rgba(255, 170, 220, 0);
+    }
+}
+
+@keyframes fireworkBurst2 {
+    0% {
+        opacity: 1;
+        transform: scale(0);
+        box-shadow: 
+            0 0 0 0 rgba(150, 200, 255, 1),
+            0 0 0 0 rgba(200, 255, 150, 1),
+            0 0 20px rgba(150, 200, 255, 0.8);
+    }
+    30% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(1.5);
+        box-shadow: 
+            -100px -100px 0 30px rgba(150, 200, 255, 0),
+            100px -100px 0 30px rgba(200, 255, 150, 0),
+            -100px 100px 0 30px rgba(150, 200, 255, 0),
+            100px 100px 0 30px rgba(200, 255, 150, 0),
+            -60px 0 0 25px rgba(150, 200, 255, 0),
+            60px 0 0 25px rgba(200, 255, 150, 0),
+            0 -60px 0 25px rgba(150, 200, 255, 0),
+            0 60px 0 25px rgba(200, 255, 150, 0),
+            -40px -40px 0 18px rgba(170, 220, 255, 0),
+            40px -40px 0 18px rgba(220, 255, 170, 0),
+            -40px 40px 0 18px rgba(170, 220, 255, 0),
+            40px 40px 0 18px rgba(220, 255, 170, 0);
+    }
+}
+
+@keyframes fireworkBurst3 {
+    0% {
+        opacity: 1;
+        transform: scale(0);
+        box-shadow: 
+            0 0 0 0 rgba(255, 200, 150, 1),
+            0 0 0 0 rgba(200, 150, 255, 1),
+            0 0 20px rgba(255, 200, 150, 0.8);
+    }
+    30% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(1.5);
+        box-shadow: 
+            -100px -100px 0 30px rgba(255, 200, 150, 0),
+            100px -100px 0 30px rgba(200, 150, 255, 0),
+            -100px 100px 0 30px rgba(255, 200, 150, 0),
+            100px 100px 0 30px rgba(200, 150, 255, 0),
+            -60px 0 0 25px rgba(255, 200, 150, 0),
+            60px 0 0 25px rgba(200, 150, 255, 0),
+            0 -60px 0 25px rgba(255, 200, 150, 0),
+            0 60px 0 25px rgba(200, 150, 255, 0),
+            -40px -40px 0 18px rgba(255, 220, 170, 0),
+            40px -40px 0 18px rgba(220, 170, 255, 0),
+            -40px 40px 0 18px rgba(255, 220, 170, 0),
+            40px 40px 0 18px rgba(220, 170, 255, 0);
+    }
+}
+
+/* Hill */
+.hill {
+    display: none;
+}
+
+/* Silhouettes & Plane removed per request */
+
+/* Month Sections */
+.month-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 2rem;
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+/* Different colors for each month */
+.month-section[data-month="january"] {
+    background: linear-gradient(135deg, #e8f4f8 0%, #d4e8f0 100%);
+}
+
+.month-section[data-month="february"] {
+    background: linear-gradient(135deg, #f0e8f4 0%, #e0d4e8 100%);
+}
+
+.month-section[data-month="march"] {
+    background: linear-gradient(135deg, #f4f0e8 0%, #e8e0d4 100%);
+}
+
+.month-section[data-month="april"] {
+    background: linear-gradient(135deg, #e8f4e8 0%, #d4e8d4 100%);
+}
+
+.month-section[data-month="may"] {
+    background: linear-gradient(135deg, #f8f4e8 0%, #f0e8d4 100%);
+}
+
+.month-section[data-month="june"] {
+    background: linear-gradient(135deg, #f0f8e8 0%, #e0f0d4 100%);
+}
+
+.month-section[data-month="july"] {
+    background: linear-gradient(135deg, #f8e8e8 0%, #f0d4d4 100%);
+}
+
+.month-section[data-month="august"] {
+    background: linear-gradient(135deg, #f4e8f0 0%, #e8d4e0 100%);
+}
+
+.month-section[data-month="september"] {
+    background: linear-gradient(135deg, #e8f0f4 0%, #d4e0e8 100%);
+}
+
+.month-section[data-month="october"] {
+    background: linear-gradient(135deg, #f4e8e0 0%, #e8d4c8 100%);
+}
+
+.month-section[data-month="november"] {
+    background: linear-gradient(135deg, #e8e8f0 0%, #d4d4e0 100%);
+}
+
+.month-section[data-month="december"] {
+    background: linear-gradient(135deg, #f0e8e8 0%, #e0d4d4 100%);
+}
+
+.month-section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.month-content {
+    max-width: 1400px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+}
+
+@media (max-width: 968px) {
+    .month-content {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+}
+
+.month-image-container {
+    width: 100%;
+    max-height: 500px;
+    overflow: visible;
+    border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15), 0 8px 25px rgba(0, 0, 0, 0.1);
+    position: relative;
+    background: linear-gradient(135deg, #fff 0%, #f8f8f8 100%);
+    padding: 20px;
+    margin: 20px 0;
+}
+
+.month-image-container::after {
+    content: '🌸';
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    font-size: 2.5rem;
+    opacity: 0.8;
+    transform: rotate(-15deg);
+    z-index: 3;
+    animation: float 3s ease-in-out infinite;
+    filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.15));
+}
+
+.month-image-container::before {
+    content: '🌺';
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    font-size: 2.5rem;
+    opacity: 0.8;
+    transform: rotate(20deg);
+    z-index: 3;
+    animation: float 3s ease-in-out infinite 1.5s;
+    filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.15));
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0) rotate(var(--initial-rotate, -15deg));
+    }
+    50% {
+        transform: translateY(-12px) rotate(calc(var(--initial-rotate, -15deg) + 5deg));
+    }
+}
+
+.month-section[data-month="january"] .month-image-container::after {
+    content: '🌸';
+}
+
+.month-section[data-month="january"] .month-image-container::before {
+    content: '🌺';
+}
+
+.flower-decoration {
+    position: absolute;
+    font-size: 2rem;
+    opacity: 0.75;
+    z-index: 3;
+    animation: float 4s ease-in-out infinite;
+    pointer-events: none;
+    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.2));
+}
+
+.flower-1 {
+    top: 10px;
+    left: 10px;
+    font-size: 2.2rem;
+    transform: rotate(-25deg);
+    animation-delay: 0s;
+}
+
+.flower-2 {
+    top: 15px;
+    right: 15px;
+    font-size: 2.3rem;
+    transform: rotate(30deg);
+    animation-delay: 1s;
+}
+
+.flower-3 {
+    bottom: 60px;
+    left: 10px;
+    font-size: 2rem;
+    transform: rotate(-20deg);
+    animation-delay: 2s;
+}
+
+.flower-4 {
+    bottom: 15px;
+    right: 20px;
+    font-size: 2.2rem;
+    transform: rotate(25deg);
+    animation-delay: 0.5s;
+}
+
+.flower-5 {
+    top: 80px;
+    right: 10px;
+    font-size: 1.8rem;
+    transform: rotate(15deg);
+    animation-delay: 1.5s;
+}
+
+.flower-6 {
+    top: 120px;
+    left: 8px;
+    font-size: 1.9rem;
+    transform: rotate(-30deg);
+    animation-delay: 2.5s;
+}
+
+.flower-7 {
+    bottom: 100px;
+    right: 12px;
+    font-size: 2rem;
+    transform: rotate(35deg);
+    animation-delay: 0.8s;
+}
+
+.flower-8 {
+    top: 200px;
+    left: 5px;
+    font-size: 1.7rem;
+    transform: rotate(-15deg);
+    animation-delay: 1.8s;
+}
+
+.flower-9 {
+    bottom: 150px;
+    left: 15px;
+    font-size: 1.9rem;
+    transform: rotate(20deg);
+    animation-delay: 3s;
+}
+
+.flower-10 {
+    top: 250px;
+    right: 8px;
+    font-size: 1.8rem;
+    transform: rotate(-25deg);
+    animation-delay: 2.2s;
+}
+
+.flower-11 {
+    top: 300px;
+    left: 12px;
+    font-size: 1.9rem;
+    transform: rotate(18deg);
+    animation-delay: 1.2s;
+}
+
+.flower-12 {
+    bottom: 200px;
+    right: 18px;
+    font-size: 2rem;
+    transform: rotate(-22deg);
+    animation-delay: 2.8s;
+}
+
+.flower-13 {
+    top: 150px;
+    right: 25px;
+    font-size: 1.7rem;
+    transform: rotate(28deg);
+    animation-delay: 1.6s;
+}
+
+.flower-14 {
+    bottom: 80px;
+    left: 20px;
+    font-size: 2.1rem;
+    transform: rotate(-18deg);
+    animation-delay: 0.9s;
+}
+
+.flower-15 {
+    top: 350px;
+    left: 8px;
+    font-size: 1.8rem;
+    transform: rotate(22deg);
+    animation-delay: 2.4s;
+}
+
+/* Decorative Creeper Border Frame */
+.branch {
+    position: absolute;
+    z-index: 2;
+    pointer-events: none;
+    opacity: 0.75;
+}
+
+.branch-1 {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 30px;
+    overflow: visible;
+}
+
+.branch-1::before {
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, #4a7c59 0%, #5a8c69 25%, #4a7c59 50%, #5a8c69 75%, #4a7c59 100%);
+    border-radius: 50px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.branch-1::after {
+    content: '';
+    position: absolute;
+    top: 12px;
+    left: 15%;
+    width: 8px;
+    height: 8px;
+    background: #5a8c69;
+    border-radius: 50% 0 50% 50%;
+    transform: rotate(45deg);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.branch-2 {
+    top: 0;
+    right: 0;
+    width: 30px;
+    height: 100%;
+    overflow: visible;
+}
+
+.branch-2::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 5px;
+    width: 3px;
+    height: 100%;
+    background: linear-gradient(180deg, #4a7c59 0%, #5a8c69 25%, #4a7c59 50%, #5a8c69 75%, #4a7c59 100%);
+    border-radius: 50px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.branch-2::after {
+    content: '';
+    position: absolute;
+    top: 20%;
+    right: 12px;
+    width: 8px;
+    height: 8px;
+    background: #5a8c69;
+    border-radius: 50% 50% 0 50%;
+    transform: rotate(-45deg);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.branch-3 {
+    bottom: 0;
+    left: 0;
+    width: 30px;
+    height: 100%;
+    overflow: visible;
+}
+
+.branch-3::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 5px;
+    width: 3px;
+    height: 100%;
+    background: linear-gradient(180deg, #4a7c59 0%, #5a8c69 25%, #4a7c59 50%, #5a8c69 75%, #4a7c59 100%);
+    border-radius: 50px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.branch-3::after {
+    content: '';
+    position: absolute;
+    top: 30%;
+    left: 12px;
+    width: 8px;
+    height: 8px;
+    background: #5a8c69;
+    border-radius: 50% 0 50% 50%;
+    transform: rotate(45deg);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.branch-4 {
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 30px;
+    overflow: visible;
+}
+
+.branch-4::before {
+    content: '';
+    position: absolute;
+    bottom: 5px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, #4a7c59 0%, #5a8c69 25%, #4a7c59 50%, #5a8c69 75%, #4a7c59 100%);
+    border-radius: 50px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.branch-4::after {
+    content: '';
+    position: absolute;
+    bottom: 12px;
+    left: 25%;
+    width: 8px;
+    height: 8px;
+    background: #5a8c69;
+    border-radius: 50% 50% 50% 0;
+    transform: rotate(-45deg);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* Decorative Creeper Threads - Side Vines */
+.thread {
+    position: absolute;
+    z-index: 2;
+    pointer-events: none;
+    opacity: 0.7;
+}
+
+.thread-1 {
+    top: 0;
+    left: 0;
+    width: 25px;
+    height: 100%;
+    overflow: visible;
+}
+
+.thread-1::before {
+    content: '';
+    position: absolute;
+    top: 10%;
+    left: 8px;
+    width: 3px;
+    height: 30%;
+    background: linear-gradient(180deg, #4a7c59 0%, #5a8c69 50%, #4a7c59 100%);
+    border-radius: 50px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+    animation: vineSway 5s ease-in-out infinite;
+}
+
+.thread-1::after {
+    content: '';
+    position: absolute;
+    top: 45%;
+    left: 12px;
+    width: 6px;
+    height: 6px;
+    background: #5a8c69;
+    border-radius: 50% 0 50% 50%;
+    transform: rotate(45deg);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    animation: leafFloat 4s ease-in-out infinite 0.5s;
+}
+
+.thread-2 {
+    top: 0;
+    right: 0;
+    width: 25px;
+    height: 100%;
+    overflow: visible;
+}
+
+.thread-2::before {
+    content: '';
+    position: absolute;
+    top: 15%;
+    right: 8px;
+    width: 3px;
+    height: 35%;
+    background: linear-gradient(180deg, #4a7c59 0%, #5a8c69 50%, #4a7c59 100%);
+    border-radius: 50px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+    animation: vineSway 5.5s ease-in-out infinite 1s;
+}
+
+.thread-2::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 12px;
+    width: 6px;
+    height: 6px;
+    background: #5a8c69;
+    border-radius: 50% 50% 0 50%;
+    transform: rotate(-45deg);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    animation: leafFloat 4.5s ease-in-out infinite 1.2s;
+}
+
+.thread-3 {
+    bottom: 0;
+    left: 0;
+    width: 25px;
+    height: 100%;
+    overflow: visible;
+}
+
+.thread-3::before {
+    content: '';
+    position: absolute;
+    bottom: 20%;
+    left: 8px;
+    width: 3px;
+    height: 30%;
+    background: linear-gradient(0deg, #4a7c59 0%, #5a8c69 50%, #4a7c59 100%);
+    border-radius: 50px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+    animation: vineSway 5.2s ease-in-out infinite 0.5s;
+}
+
+.thread-3::after {
+    content: '';
+    position: absolute;
+    bottom: 45%;
+    left: 12px;
+    width: 6px;
+    height: 6px;
+    background: #5a8c69;
+    border-radius: 50% 0 50% 50%;
+    transform: rotate(45deg);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    animation: leafFloat 4.2s ease-in-out infinite 0.8s;
+}
+
+@keyframes vineSway {
+    0%, 100% {
+        transform: translateX(0) rotate(0deg);
+    }
+    25% {
+        transform: translateX(1px) rotate(1deg);
+    }
+    50% {
+        transform: translateX(2px) rotate(2deg);
+    }
+    75% {
+        transform: translateX(1px) rotate(1deg);
+    }
+}
+
+@keyframes leafFloat {
+    0%, 100% {
+        transform: rotate(45deg) translateY(0);
+    }
+    50% {
+        transform: rotate(50deg) translateY(-2px);
+    }
+}
+
+.month-image-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 12px;
+    padding: 2px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+}
+
+.month-image {
+    width: 100%;
+    height: 400px;
+    display: block;
+    object-fit: cover;
+    border-radius: 12px;
+    transition: transform 0.6s ease;
+}
+
+.month-image:hover {
+    transform: scale(1.03);
+}
+
+.month-section[data-month="april"] .month-image {
+    height: 300px;
+    width: 35%;
+    max-width: 35%;
+    object-fit: contain;
+    margin: 0 auto;
+}
+
+.month-section[data-month="january"] .month-image {
+    height: 550px;
+    object-fit: cover;
+    object-position: center;
+}
+
+
+/* May Images Grid - Side by Side */
+.month-section[data-month="may"] .month-content {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.may-images-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    width: 100%;
+}
+
+.may-image-wrapper {
+    width: 100%;
+}
+
+.may-image-wrapper .month-image-container {
+    width: 100%;
+    max-height: 450px;
+    padding: 15px;
+    margin: 0;
+}
+
+.may-image-wrapper .month-image {
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+}
+
+.month-section[data-month="may"] .month-text {
+    text-align: center;
+    width: 100%;
+}
+
+@media (max-width: 968px) {
+    .may-images-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .may-image-wrapper .month-image {
+        height: 300px;
+    }
+}
+
+/* June Images Grid - 3 images side by side */
+.month-section[data-month="june"] .month-content {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.june-images-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem;
+    width: 100%;
+    padding: 1rem 0;
+}
+
+.june-image-wrapper {
+    width: 100%;
+    transition: transform 0.3s ease;
+}
+
+.june-image-wrapper:hover {
+    transform: translateY(-5px);
+}
+
+.june-image-wrapper .month-image-container {
+    width: 100%;
+    max-height: 480px;
+    padding: 18px;
+    margin: 0;
+    transition: box-shadow 0.3s ease;
+}
+
+.june-image-wrapper:hover .month-image-container {
+    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.2), 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.june-image-wrapper .month-image {
+    width: 100%;
+    height: 380px;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.june-image-wrapper:hover .month-image {
+    transform: scale(1.05);
+}
+
+.month-section[data-month="june"] .month-text {
+    text-align: center;
+    width: 100%;
+}
+
+/* July Images Grid - Single Image */
+.month-section[data-month="july"] .month-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+}
+
+.july-images-grid {
+    width: 100%;
+}
+
+.july-image-wrapper {
+    width: 100%;
+}
+
+.july-image-wrapper .month-image-container {
+    width: 100%;
+    max-height: 500px;
+    padding: 18px;
+    margin: 0;
+}
+
+.july-image-wrapper .month-image {
+    width: 100%;
+    height: 450px;
+    object-fit: cover;
+}
+
+.month-section[data-month="july"] .month-text {
+    text-align: left;
+    width: 100%;
+}
+
+@media (max-width: 968px) {
+    .month-section[data-month="july"] .month-content {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+    
+    .month-section[data-month="july"] .month-text {
+        text-align: center;
+    }
+}
+
+/* August Images Grid - 3 images side by side */
+.month-section[data-month="august"] .month-content {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.august-images-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem;
+    width: 100%;
+    padding: 1rem 0;
+}
+
+.august-image-wrapper {
+    width: 100%;
+    transition: transform 0.3s ease;
+}
+
+.august-image-wrapper:hover {
+    transform: translateY(-5px);
+}
+
+.august-image-wrapper .month-image-container {
+    width: 100%;
+    max-height: 480px;
+    padding: 18px;
+    margin: 0;
+    transition: box-shadow 0.3s ease;
+}
+
+.august-image-wrapper:hover .month-image-container {
+    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.2), 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.august-image-wrapper .month-image {
+    width: 100%;
+    height: 380px;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.august-image-wrapper:first-child .month-image {
+    object-fit: cover;
+    height: 450px;
+    object-position: center top;
+}
+
+.august-image-wrapper:hover .month-image {
+    transform: scale(1.05);
+}
+
+.month-section[data-month="august"] .month-text {
+    text-align: center;
+    width: 100%;
+}
+
+/* March Images Grid - 3 images side by side */
+.month-section[data-month="march"] .month-content {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.march-images-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem;
+    width: 100%;
+    padding: 1rem 0;
+}
+
+.march-image-wrapper {
+    width: 100%;
+    transition: transform 0.3s ease;
+}
+
+.march-image-wrapper:hover {
+    transform: translateY(-5px);
+}
+
+.march-image-wrapper .month-image-container {
+    width: 100%;
+    max-height: 480px;
+    padding: 18px;
+    margin: 0;
+    transition: box-shadow 0.3s ease;
+}
+
+.march-image-wrapper:hover .month-image-container {
+    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.2), 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.march-image-wrapper .month-image {
+    width: 100%;
+    height: 380px;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.march-image-wrapper:hover .month-image {
+    transform: scale(1.05);
+}
+
+.month-section[data-month="march"] .month-text {
+    text-align: center;
+    width: 100%;
+}
+
+/* September Images Grid - 3 images side by side */
+.month-section[data-month="september"] .month-content {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.september-images-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem;
+    width: 100%;
+    padding: 1rem 0;
+}
+
+.september-image-wrapper {
+    width: 100%;
+    transition: transform 0.3s ease;
+}
+
+.september-image-wrapper:hover {
+    transform: translateY(-5px);
+}
+
+.september-image-wrapper .month-image-container {
+    width: 100%;
+    max-height: 480px;
+    padding: 18px;
+    margin: 0;
+    transition: box-shadow 0.3s ease;
+}
+
+.september-image-wrapper:hover .month-image-container {
+    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.2), 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.september-image-wrapper .month-image {
+    width: 100%;
+    height: 380px;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.september-image-wrapper:hover .month-image {
+    transform: scale(1.05);
+}
+
+/* Adjust september2 image specifically to show full image */
+.september-image-wrapper:nth-child(3) .month-image {
+    object-fit: contain;
+    height: auto;
+    max-height: 380px;
+}
+
+.month-section[data-month="september"] .month-text {
+    text-align: center;
+    width: 100%;
+}
+
+/* October Images Grid - 3 images side by side */
+.month-section[data-month="october"] .month-content {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.october-images-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem;
+    width: 100%;
+    padding: 1rem 0;
+}
+
+.october-image-wrapper {
+    width: 100%;
+    transition: transform 0.3s ease;
+}
+
+.october-image-wrapper:hover {
+    transform: translateY(-5px);
+}
+
+.october-image-wrapper .month-image-container {
+    width: 100%;
+    max-height: 480px;
+    padding: 18px;
+    margin: 0;
+    transition: box-shadow 0.3s ease;
+}
+
+.october-image-wrapper:hover .month-image-container {
+    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.2), 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.october-image-wrapper .month-image {
+    width: 100%;
+    height: 380px;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.october-image-wrapper:hover .month-image {
+    transform: scale(1.05);
+}
+
+.month-section[data-month="october"] .month-text {
+    text-align: center;
+    width: 100%;
+}
+
+/* November Images Grid - 3 images side by side */
+.month-section[data-month="november"] .month-content {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.november-images-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem;
+    width: 100%;
+    padding: 1rem 0;
+}
+
+.november-image-wrapper {
+    width: 100%;
+    transition: transform 0.3s ease;
+}
+
+.november-image-wrapper:hover {
+    transform: translateY(-5px);
+}
+
+.november-image-wrapper .month-image-container {
+    width: 100%;
+    max-height: 480px;
+    padding: 18px;
+    margin: 0;
+    transition: box-shadow 0.3s ease;
+}
+
+.november-image-wrapper:hover .month-image-container {
+    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.2), 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.november-image-wrapper .month-image {
+    width: 100%;
+    height: 380px;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.november-image-wrapper:hover .month-image {
+    transform: scale(1.05);
+}
+
+.month-section[data-month="november"] .month-text {
+    text-align: center;
+    width: 100%;
+}
+
+/* December Images Grid - 2 images side by side */
+.month-section[data-month="december"] .month-content {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.december-images-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.5rem;
+    width: 100%;
+    padding: 1rem 0;
+}
+
+.december-image-wrapper {
+    width: 100%;
+    transition: transform 0.3s ease;
+}
+
+.december-image-wrapper:hover {
+    transform: translateY(-5px);
+}
+
+.december-image-wrapper .month-image-container {
+    width: 100%;
+    max-height: 500px;
+    padding: 18px;
+    margin: 0;
+    transition: box-shadow 0.3s ease;
+}
+
+.december-image-wrapper:hover .month-image-container {
+    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.2), 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.december-image-wrapper .month-image {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.december-image-wrapper:hover .month-image {
+    transform: scale(1.05);
+}
+
+.month-section[data-month="december"] .month-text {
+    text-align: center;
+    width: 100%;
+}
+
+@media (max-width: 968px) {
+    .march-images-grid,
+    .june-images-grid,
+    .august-images-grid,
+    .september-images-grid,
+    .october-images-grid,
+    .november-images-grid,
+    .december-images-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .march-image-wrapper .month-image,
+    .june-image-wrapper .month-image,
+    .august-image-wrapper .month-image,
+    .september-image-wrapper .month-image,
+    .october-image-wrapper .month-image,
+    .november-image-wrapper .month-image,
+    .december-image-wrapper .month-image {
+        height: 320px;
+    }
+    
+    .march-image-wrapper .month-image-container,
+    .june-image-wrapper .month-image-container,
+    .august-image-wrapper .month-image-container,
+    .september-image-wrapper .month-image-container,
+    .october-image-wrapper .month-image-container,
+    .november-image-wrapper .month-image-container,
+    .december-image-wrapper .month-image-container {
+        max-height: 400px;
+        padding: 15px;
+    }
+}
+
+.month-text {
+    text-align: left;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+@media (max-width: 968px) {
+    .month-text {
+        text-align: center;
+    }
+}
+
+.month-name {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 300;
+    color: #2c2c2c;
+    margin-bottom: 1.5rem;
+    letter-spacing: 3px;
+    line-height: 1.2;
+}
+
+.month-caption {
+    font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+    color: #5a5a5a;
+    font-weight: 300;
+    line-height: 2;
+    max-width: 100%;
+    margin: 0;
+}
+
+/* Closing Section */
+.closing {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #3a3a3a 0%, #2d2d2d 100%);
+    padding: 4rem 2rem;
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.closing.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.closing-content {
+    text-align: center;
+    max-width: 700px;
+}
+
+.closing-text {
+    font-size: clamp(1.25rem, 3vw, 1.75rem);
+    color: #e8e8e8;
+    font-weight: 300;
+    line-height: 2;
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.5px;
+}
+
+.closing-text:last-child {
+    margin-bottom: 0;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .landing-content {
+        padding: 1.5rem;
+    }
+
+    .month-section {
+        padding: 3rem 1.5rem;
+    }
+
+    .month-content {
+        gap: 2rem;
+    }
+
+    .month-image-container {
+        max-width: 100%;
+    }
+
+    .scroll-button {
+        padding: 0.875rem 2rem;
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .landing-text {
+        margin-bottom: 2rem;
+    }
+
+    .month-content {
+        gap: 1.5rem;
+    }
+
+    .closing-text {
+        line-height: 1.8;
+    }
+
+    /* Animation mobile adjustments */
+    .person {
+        width: 80px;
+        height: 100px;
+    }
+
+    .plane {
+        width: 80px;
+        height: 80px;
+    }
+
+    .banner {
+        font-size: 11px;
+        padding: 6px 15px;
+        top: -35px;
+    }
+
+    .banner::after {
+        border-left-width: 5px;
+        border-right-width: 5px;
+        border-top-width: 6px;
+    }
+
+    .plane-container {
+        top: 15%;
+    }
+}
+
